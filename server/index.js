@@ -1,6 +1,7 @@
 const express = require("express");
 const socketio  = require("socket.io");
 const http = require("http");
+const cors = require("cors");
 
 const { addUser, removeUser, getUser, getUsersInRoom} = require("./users.js");
 
@@ -13,7 +14,8 @@ const PORT = process.env.PORT || 5000;
 const router = require("./router");
 
 
-
+app.use(router);
+app.use(cors());
 
 
 io.on('connection', (socket) => {
@@ -55,18 +57,6 @@ io.on('connection', (socket) => {
     })
 });
 
-
-
-
-
-
-
-
-
-
-
-
-app.use(router);
 server.listen(PORT,() => console.log("server has started on " + PORT));
 
 
